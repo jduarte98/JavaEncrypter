@@ -9,15 +9,13 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * @author https://howtodoinjava.com/java/java-security/java-aes-encryption-example/  (08 Feb 2021)
+ * @author https://howtodoinjava.com/java/java-security/java-aes-encryption-example/  (11 Apr 2022)
  */
 public class Encryption {
-
     private static SecretKeySpec secretKey;
     private static byte[] key;
 
-    public static void setKey(String myKey)
-    {
+    private static void setKey(String myKey) {
         MessageDigest sha = null;
         try {
             key = myKey.getBytes("UTF-8");
@@ -34,36 +32,29 @@ public class Encryption {
         }
     }
 
-    public static String encrypt(String strToEncrypt, String secret)
-    {
-        try
-        {
+    public static String encrypt(String strToEncrypt, String secret) {
+        try {
             setKey(secret);
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
             return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             System.out.println("Error while encrypting: " + e.toString());
         }
         return null;
     }
 
-    public static String decrypt(String strToDecrypt, String secret)
-    {
-        try
-        {
+    public static String decrypt(String strToDecrypt, String secret) {
+        try {
             setKey(secret);
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             System.out.println("Error while decrypting: " + e.toString());
         }
         return null;
     }
-
 }
