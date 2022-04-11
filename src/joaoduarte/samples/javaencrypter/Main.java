@@ -4,6 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ *@author João Duarte (https://github.com/jduarte98 | www.linkedin.com/in/joão-duarte-453bb9199)
+ *@version 1
+ *
+ */
 public class Main {
     private static Encryption encryption = new Encryption();
     private static boolean keepRunning = true;
@@ -11,6 +16,10 @@ public class Main {
     private static String salt = "";
     private static int opt = -1;
 
+    /**
+     * Main Function
+     * @param args --
+     */
     public static void main(String[] args) {
         System.out.println("### JAVA ENCRYPTER | " + new SimpleDateFormat("yyyy").format(new Date()) + " ###");
         System.out.println(" Tip:\n  - Secret salt is used to enhance the security of the encryption.\n  - Define the Salt on the next step.\n  - Remember that, when decrypting, you must use the correct Salt for correct results!\n");
@@ -20,7 +29,9 @@ public class Main {
         }
     }
 
-
+    /**
+     * Presents the Main Menu to the User and performs the launch modules logic.
+     */
     private static void mainMenu(){
         try{
             System.out.println(" Menu:\n     1 - Encrypt Text\n     2 - Decrypt Text\n     3 - Salt Settings\n     4 - Exit");

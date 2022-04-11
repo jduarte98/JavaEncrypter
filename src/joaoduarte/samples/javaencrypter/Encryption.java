@@ -9,12 +9,17 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * @author https://howtodoinjava.com/java/java-security/java-aes-encryption-example/  (11 Apr 2022)
+ * @author https://howtodoinjava.com/java/java-security/java-aes-encryption-example/
+ * Last Access: 11-Apr-2022
  */
 public class Encryption {
     private static SecretKeySpec secretKey;
     private static byte[] key;
 
+    /**
+     * Set Keys
+     * @param myKey String
+     */
     private static void setKey(String myKey) {
         MessageDigest sha = null;
         try {
@@ -25,13 +30,19 @@ public class Encryption {
             secretKey = new SecretKeySpec(key, "AES");
         }
         catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            System.out.println("       !!! Cannot set Key !!!");
         }
         catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            System.out.println("       !!! Cannot set Key !!!");
         }
     }
 
+    /**
+     * Encrypt String
+     * @param strToEncrypt String to be Encrypted
+     * @param secret Salt Key
+     * @return Encrypted String
+     */
     public static String encrypt(String strToEncrypt, String secret) {
         try {
             setKey(secret);
@@ -40,11 +51,17 @@ public class Encryption {
             return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
         }
         catch (Exception e) {
-            System.out.println("Error while encrypting: " + e.toString());
+            System.out.println("       !!! Cannot Encrypt this String !!!");
         }
         return null;
     }
 
+    /**
+     * Decript String
+     * @param strToDecrypt String to be Decrypted
+     * @param secret Salt Key
+     * @return Decrypted String
+     */
     public static String decrypt(String strToDecrypt, String secret) {
         try {
             setKey(secret);
@@ -53,7 +70,7 @@ public class Encryption {
             return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
         }
         catch (Exception e) {
-            System.out.println("Error while decrypting: " + e.toString());
+            System.out.println("       !!! Cannot Decrypt this String !!!");
         }
         return null;
     }
